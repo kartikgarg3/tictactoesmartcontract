@@ -3,8 +3,9 @@ pragma solidity ^0.4.7;
 contract TicTacToe
 {
     address game_master;
-    uint256[][9] game_board;
+    uint[] game_board = new uint[](9);
     uint num_winning_states;
+    uint player_tracker;
     uint[][]  game_state_wins = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8],[2,4,6]  ];
     constructor()
     {
@@ -27,7 +28,7 @@ contract TicTacToe
         for(uint j = 0; j < num_winning_states; j++)
         {
             uint[] memory b = game_state_wins[i];
-            if(board[b[0]] != 0 && board[b[0]] == board[b[1]] && board[b[0]] == board[b[2]])
+            if(game_board[b[0]] != 0 && game_board[b[0]] == game_board[b[1]] && board[b[0]] == board[b[2]])
             {
                 return board[b[0]];
             }
@@ -37,15 +38,22 @@ contract TicTacToe
     
     function turn(uint256 index) returns (string)
     {
-        uint256 winner = checkWinner();
+        uint256 winner = checkWinner(); // check if we already have a winner
+        
         if (winner == 1)
         {
             return "Winner is 1";
         }
         if (winner == 2)
         {
-            return "Winner is 2"
+            return "Winner is 2";
         }
+        require(index > 0);
+        require(index < 9);
+        require(game_board[index] != 0);
+        board[index] = player_tracker + 1;
+        player_tracker = player_tracker - 1; // changing the state bacl
+        return "Move has been made" ;
     }
     
     
