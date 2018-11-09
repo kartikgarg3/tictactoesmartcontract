@@ -27,10 +27,10 @@ contract TicTacToe
     {
         for(uint j = 0; j < num_winning_states; j++)
         {
-            uint[] memory b = game_state_wins[i];
-            if(game_board[b[0]] != 0 && game_board[b[0]] == game_board[b[1]] && board[b[0]] == board[b[2]])
+            uint[] memory b = game_state_wins[j];
+            if(game_board[b[0]] != 0 && game_board[b[0]] == game_board[b[1]] && game_board[b[0]] == game_board[b[2]])
             {
-                return board[b[0]];
+                return game_board[b[0]];
             }
         }
     return 0;
