@@ -51,7 +51,7 @@ contract TicTacToe
         require(index > 0);
         require(index < 9);
         require(game_board[index] != 0);
-        board[index] = player_tracker + 1;
+        game_board[index] = player_tracker + 1;
         player_tracker = player_tracker - 1; // changing the state bacl
         return "Move has been made" ;
     }
