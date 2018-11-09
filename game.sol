@@ -25,8 +25,8 @@ contract TicTacToe
     
     function registerplayer()
     {
-        // require(p1 != 0);
-        // require(p2 == 0);
+        require(p1 != 0);
+        require(p2 == 0);
         p2 = msg.sender;
     }
     
@@ -55,7 +55,18 @@ contract TicTacToe
         {
             return "Winner is 2";
         }
-        // require(index > 0);
+        
+        if(index<0||index>9)
+        {
+            return "Index Out of Range";
+        }
+        
+        if(player_tracker == 0){
+            if(msg.sender != p1) return "you are not player 1";
+        }else if(player_tracker == 1){
+            if(msg.sender != p2) return "you are not player 2";
+}
+        
         // require(index < 9);
         // require(game_board[index] != 0);
         game_board[index] = player_tracker + 1;
